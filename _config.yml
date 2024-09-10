@@ -7,7 +7,7 @@ description: > # this means to ignore newlines until "baseurl:"
   A bunch of sequential art by Jonathan Glass
 
 
-baseurl: https://seethroughcomics.github.io/
+baseurl: https://seethroughcomics.github.io
 url: / #Leave this, change the baseurl.
 
 # Exclude our ruby stuff

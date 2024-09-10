@@ -60,7 +60,7 @@ end
 
 # Ping Google and Yahoo to let them know you updated your site
 
-site = "www.YOUR-URL.com"
+site = "https://seethroughcomics.github.io/"
 
 desc 'Notify Google of the new sitemap'
 task :sitemapgoogle do
