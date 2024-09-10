@@ -1,1 +1,1 @@
-# SeeThroughComics-SeeThroughComics.github.io
+# SeeThroughComics.github.io
