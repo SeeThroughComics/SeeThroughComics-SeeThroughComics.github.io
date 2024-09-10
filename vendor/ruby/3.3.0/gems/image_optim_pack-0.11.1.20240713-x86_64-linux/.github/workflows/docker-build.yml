@@ -1,0 +1,23 @@
+name: docker-build
+on:
+  push:
+    tags:
+    - '*'
+  workflow_dispatch:
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        params:
+        - ''
+        - DOCKER_FILE=Dockerfile.debian DOCKER_TAG_SUFFIX=-debian
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - run: make docker-push ${{ matrix.params }}

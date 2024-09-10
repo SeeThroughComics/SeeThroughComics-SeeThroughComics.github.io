@@ -1,0 +1,30 @@
+name: livecheck
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: 34 5 * * *
+jobs:
+  livecheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3'
+        bundler-cache: true
+    - run: |
+        MAX_ATTEMPTS=10
+        for ((attempt = 1; ; attempt++)); do
+          echo "#### Attempt $attempt"
+          if bundle exec script/livecheck; then
+            exit
+          else
+            exit_code=$?
+            if [ $exit_code -eq 2 ] && [ $attempt -lt $MAX_ATTEMPTS ]; then
+              sleep 3
+            else
+              exit $exit_code
+            fi
+          fi
+        done
